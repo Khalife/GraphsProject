@@ -28,13 +28,21 @@ E=EXP3G(Wstrong,gamma,eta);
 E.init();
 regret=zeros(T,1);
 
+% sequence of loss functions
 lt=abs(randn(size(Wstrong,1),T));
-loss_t=[];
-for t=1:T
-    
-    E.play(lt);
-    E.update();
-    loss_t=[loss_t,lt(E.It,t)];
-    regret(t)=sum(loss_t)-min(sum(lt(:,[1:t]),2));
 
+
+N_monte_carlo=1000;
+for n=1:N_monte_carlo
+        loss_t=[];
+    for t=1:T
+
+        E.play(lt);
+        E.update();
+        loss_t=[loss_t,lt(E.It,t)];
+        regret(t)=sum(loss_t)-min(sum(lt(:,[1:t]),2));
+
+    end
+    disp(n);
 end
+    regret = (1/N)*regret;
