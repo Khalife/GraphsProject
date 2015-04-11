@@ -5,7 +5,7 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amsfonts}
-\usepackage{ upgreek }
+\usepackage{upgreek}
 \usepackage{subfigure}
 \usepackage{algorithm}
 \usepackage{placeins}
@@ -80,7 +80,7 @@ $ R(G,T) = \tilde{\Uptheta}(\delta^{1/2}T^{1/2})$
 If the graph is unobservable, then 
 $ R(G,T) = \tilde{\Uptheta}(T) $.
 
-Similar to the EXP3 in the contex of adversarial bandits, the EXP3G algorithm [1] explores the graph given an exploration set U, an exploration rate $\gamma \in [0,1]$ and a learning rate $\eta > 0$. U(V) is the uniform distribution over V.
+Similar to the EXP3 in the contex of adversarial bandits, the EXP3G algorithm [1] explores the graph given an exploration set U, an exploration rate $\gamma \in [0,1]$ and a learning rate $\eta > 0$. U(V) is the uniform distribution over V.\\
 
  \FloatBarrier
  \begin{algorithm}
@@ -95,9 +95,24 @@ Similar to the EXP3 in the contex of adversarial bandits, the EXP3G algorithm [1
  \end{algorithm}
  \FloatBarrier
  
+ The goal of this project is to characterize unstable graphs. Unstable in this context means that if we add or delete an edge on the graph the regret behaviour will change dramatically. The main idea is to prove that the graphs on the edge between the three previous classes and to devise experiments showing this behaviour.
+ 
 \section*{2 Unstable graphs}
 ~\\
-Blablabla
+The goal of this section is to identify unstable graphs. Without loss of generality, we investigate the effect of adding one edge to a graph on the independence and weak domination numbers. Starting with the first case, the independence number is by definition the size of the largest independant set i.e. a set of vertices that are not connected by edges. Adding an edge to the graph measn that we connect two vertices that were not connected before. There are three cases. In the first one, the two newly connected vertices were part of a non maximal independent set, which means that the independence number is unchanged. The second case, is where there are more than one maximal independent set, which means aslo that the independence number remains unchanged. The last case, is when, at least, one of the vertices is part od the unique maximal independent set. In this case, the independence number is reduced by either one or two. In sumury, adding on edge to a graph means that the independence number varyies(diminishes) by $2$ at the maximum. Reciprocally, deleting an edge wil have the reverse effect.\\
+
+Concerning the weak domination number, we start by identifying three possible cases. In the first one, we add an edge connecting going to a non observable vertice. In that case, this vertice becomes a weakly observable and all dominating sets would incorporate the dominating vertice - if it is not already in - which means that the weak domination number is at most augmented by $1$. If the new edge goes to a weakly observable vertice, the minimal dominating set would be unchanged because there exists an other dominating vertice ithat is already being accounted for. In the case where it is a strongly observable the dominating sets are all unchanged. So, in a nutshell, the weak domination number varyies at most by $1$. Reciprocally, deleting an edge wil have the reverse effect.\\
+
+Based on the previous reasoning and the Theorem $1$ in \cite{journals/corr/AlonCDK15}, if the graph stays in the same class after adding or deleting a graph the bounds on regrets do not change by much and more importantly it does not change its evolution with respect to the time evolution.\\
+
+Now we need to investigate the cases were graphs goes from one class to another by just adding or deleting an edge. There are three possibilities at hand: going from a strongly observable graphs to weakly observable onesa , going from the strong observable graph to an non observable one and going from a weakly observable graph to a non observable one ; and vice versa.\\
+
+ Let's start with a strongly observable graph. We can subdivise the set of vertices $V$  into four sets: $V_1$ the set of vertices$i$ such that  $i \notin N^{in}(i)$, $V_2$ the set of vertices$i$ such that  $i \in N^{in}(i) \text{ and } \vert N^{in}(i)\vert=\vert V \vert$, $V_3$ the set of vertices$i$ such that  $i \in N^{in}(i) \text{ and } \vert N^{in}(i)\vert=1$ and $V_4$ the set of vertices$i$ such that  $i \in N^{in}(i) \text{ and } 1<\vert N^{in}(i)\vert<\vert V \vert$. Adding an edge to such a graph would certainly not make it changing its nature, so we will focus on the effect of deleting an edge. If we delete an edge going to a vertice in $V_2$, this vertice would stay strongly observable in any case, whereas if it is in $V_1$ this means that deleting any edge going to the vertice would make it weakly observable. If we consider now a vertice in $V_3$ deleting the only edge which was a self loop will make the vertice and the graph unobservable. In the other hand two cases are identified: the first one is when we delete the self loop, in that case we get a weakly obserable vertice or we delete an other incoming edge wich changes nothing to the nature\\
+  of the graph. In sumury, if $V_2= \emptyset$ and we delete an incoming edge for a vertice in $V_1$ or the self loop for a vertice in $V_4$, we would get a weakly observable graph. If we maintain  $V_2= \emptyset$, $V_3 \neq \emptyset$ and we delete the self loop for a vertice in $V_3$, we get a non observable graph. This is the only way to go to a non observable or a weakly observable graph from a strongly observable one by deleting one edge and vice versa.\\
+  
+  We consider now the weakly observable graph and we subdivise the set of vertices $V$ into two sets this time:$V_5$ where vertices $i$ have only one incoming edge and $V_6$ where vertices $i$ have more than one incoming edge. We are interested into getting a non observable graph by deleting only one edge. If we delete an incoming edge for a vertice in $V_6$ it remains observable while if we do the same thing to a vertice in $V_5$ the vertice becomes non observable. And thus, the only way to get a a non observable graph from a weakly observable one by deleting only one edge, is to have $V_5 \neq \emptyset$ and to delete an incoming edge of a vertice in that set.\\
+  
+  There are a  lot of unstable graphs to be considered, so we need to investigate the graphs that can yield the most difference possible. There is only one case to consider here since the bound on the non observable case depend only on $T$ the time horizon. So we are looking for a graph that can yield too different independence and weak domination numbers. We start from a strongly observable set. the weak domination number of the resulting graph after deleting an edge is obviously $\delta=1$ since there is only one weakly observable vertice. So that leaves us with one choice. getting the independence number $\alpha$ the bigger possible. The bandit graph is the only graph to have $\alpha =\vert V\vert$ but we cannot get a weakly observable graph by only deleting one edge. So the best we can do is to have $\alpha=\vert V \vert -1$. To get an example, we can just add one edge to the bandit graph and delet the self loop on the vertice with an incoming edge. We can add an edge coming from the same vertice from where originates the previous edge and going to another vertice. We continue doing it until we get the graph in figure ~\ref{fig::ex} . All of these, graphs has an $\alpha= \vert V\vert -1$. An obvious choice would be then to get a graph as big as possible so as to get a big difference between $\alpha$ and $\delta$
 ~\\
 \section*{3 Experiments }
 
@@ -116,7 +131,7 @@ labelstyle = {sloped,draw,text=blue}]
 
 \begin{figure}[h]
 	
-\subfigure[before]{
+\subfigure[\label{fig::ex}before]{
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
 thick,main node/.style={circle,draw,font=\Large\bfseries}]
 \node[main node] (1) at (0,0) {1};
