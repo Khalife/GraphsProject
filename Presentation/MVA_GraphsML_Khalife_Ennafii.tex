@@ -1,0 +1,143 @@
+% This text is proprietary.
+% It's a part of presentation made by myself.
+% It may not used commercial.
+% The noncommercial use such as private and study is free
+% Nov. 2006
+% Author: Sascha Frank 
+% University Freiburg 
+% www.informatik.uni-freiburg.de/~frank/
+%
+% additional usepackage{beamerthemeshadow} is used
+%  
+%  \beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+%  with this the elements which were coming soon were only hinted
+\documentclass{beamer}
+\usepackage{beamerthemeshadow}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}  
+\usepackage[T1]{fontenc} 
+%\usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm,asymmetric]{geometry}
+
+\usepackage{tkz-graph}
+\usepackage{amsmath}
+\usepackage{array,multirow,makecell}
+\usepackage{float}
+\usepackage{cancel}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{subfig}
+\usepackage{wrapfig}
+\usepackage{ stmaryrd }
+\usepackage{placeins}
+\usepackage{ amssymb }
+\usepackage{mathtools}
+\begin{document}
+\title{Significant perturbations in observability graph\\}  
+\author{Oussama Ennafii \& Sammy Khalife}
+\date{\today} 
+
+\frame{\titlepage} 
+
+%\frame{\frametitle{Table of contents}\tableofcontents} 
+
+
+\section{Introduction} 
+
+\subsection{Introduction}
+\frame{ \frametitle{Introduction}
+\begin{itemize}
+	\item Presentation feedback graph
+	\item Sequence of losses $(l_t)_{1 \leq t \leq T}$ and actions $(I_t)_{1 \leq t \leq T} $
+	~\\
+	~\\
+	\item Minimax regret $ R(G,T)=\min_{S} \max_{l_1,...,l_T} \mathbb{E}  \sum_{t=1}^{T} l_t(I_t) -\min_{i} \sum_{t=1}^{T}l_t(i)  $
+	~\\
+\end{itemize}
+~\\
+		%\centering \includegraphics[width=5cm]{Afib_ecg.jpg}
+
+
+}
+
+
+\frame{\frametitle{Well-known configuration}
+		\begin{itemize}
+			\item EWF \qquad \qquad \qquad \qquad \qquad \qquad \qquad EXP3 configuration
+			\end{itemize}
+			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+			thick,main node/.style={circle,draw,font=\Large\bfseries}]
+			\node[main node] (1) at (0,0) {1};
+			\node[main node] (2) at (-1.5,-0.7) {2};
+			\node[main node] (3) at (-0.7, -2) {3};
+			\node[main node] (4) at (0.7,-2) {4};
+			\node[main node] (5) at (1.5,-0.7) {5};
+			\path
+			(1) edge [loop above] node {} (1);
+			\path
+			(2) edge [loop below] node {} (2);
+			\path
+			(3) edge [loop below] node {} (3);
+			\path
+			(4) edge [loop below] node {} (4);
+			\path
+			(5) edge [loop below] node {} (5);
+			
+			\tikzstyle{LabelStyle}=[fill=white,sloped]
+			%\tikzstyle{EdgeStyle}=[bend left]
+			\Edge[](1)(2)
+			\Edge[](1)(3)
+			\Edge[](1)(4)
+			\Edge[](1)(5)
+			\Edge[](2)(4)
+			\Edge[](4)(3)
+			\Edge[](5)(4)
+			\Edge[](5)(3)
+			%\tikzstyle{EdgeStyle}=[bend right]
+			\Edge[](5)(1)
+			\Edge[](4)(1)
+			\Edge[](3)(2)
+			\Edge[](4)(2)
+			\Edge[](3)(4)
+			\Edge[](4)(5)
+			\Edge[](3)(1)
+			\Edge[](3)(5)
+			\Edge[](2)(1)
+			\end{tikzpicture}
+			\hfill
+			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+			thick,main node/.style={circle,draw,font=\Large\bfseries}]
+			\node[main node] (1) at (0,0) {1};
+			\node[main node] (2) at (-1.5,-0.7) {2};
+			\node[main node] (3) at (-0.7, -2) {3};
+			\node[main node] (4) at (0.7,-2) {4};
+			\node[main node] (5) at (1.5,-0.7) {5};
+			\path
+			(1) edge [loop above] node {} (1);
+			\path
+			(2) edge [loop above] node {} (2);
+			\path
+			(3) edge [loop above] node {} (3);
+			\path
+			(4) edge [loop above] node {} (4);
+			\path
+			(5) edge [loop above] node {} (5);
+			\end{tikzpicture}
+}
+
+\subsection{Previous results}
+\frame{\frametitle{Previous results}
+\begin{itemize}
+ 
+ \item  Bounds on the minimax regret with respect of the geometry of the graph :
+ ~\\
+ ~\\
+\item Strongly observable with independence number $\alpha$ : $ R(G,T)= \tilde{O}(\alpha^{1/2}T^{1/2})$.
+\item Weakly observable with domination number $\delta$ : $ R(G,T) = \tilde{O}(\delta^{1/2}T^{1/2})$
+ \item Unobservable : $ R(G,T) = \tilde{O}(T) $.
+\end{itemize}
+}
+
+
+
+
+\end{document}
