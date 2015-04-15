@@ -162,10 +162,65 @@
 \frame{
 	\frametitle{Definitions:}
 	\begin{block}{Definition:(Observability)}
-		Let $G=(V,E)$ be a directed graph.
+		Let $G=(V,E)$ be a directed graph. A vertex $v$ is called observable if $N_{in}(v) \neq \emptyset$.\\
+		$v$ is strongly observable if it has a self loop or $V\setminus \{v\} \subset N_{in}(v) $. It is weakly observalble in case when it is observable but not strongly.\\
+		A graph $G$ is observable if all its vertices are observable and it is strongly observable if all its vertices are strongly observable. A graph is weakly observable if it is observable but not strongly.
+		
 	\end{block}
 	
 	}
+	
+	\frame{
+		\frametitle{Definitions:}
+		\begin{block}{Definition:(Weak Domination)}
+			In a directed graph $ G = (V,E)$ with a set of weakly observable vertices $W \subset V$ , a weakly dominating set $D \subset V$ is a set of vertices that dominates W. Namely, for any $w \in W$ there exists $d \in D$ such that $w \in N_{out}(d)$. The weak domination number of G, denoted by $\delta(G)$, is the size of the smallest weakly dominating set.
+			
+		\end{block}
+		
+	}
+	
+	
+	\frame{
+		\frametitle{Definitions:}
+		\begin{block}{Definition:(Independence)}
+			An independent set$ S \subset V$ is a set of vertices that are not connected by any edges. Namely, for any $u,v \in S, u\neq v$ it holds that $(u,v)\notin E$. The independence number $\alpha(G)$ of $G$ is the size of its largest independent set.
+			
+		\end{block}
+		
+	}
+	
+	\subsection{Unstable graphs:}
+	
+	\frame{
+		\frametitle{Stable graphs:}
+		If we stay in the same class, adding or deleting one edge would result in:
+		\begin{itemize}
+			\item The independence number $\alpha$ varies at most by $2$.
+			\item The weak domination number $\delta$ varies at most by $1$.
+		\end{itemize}
+		
+		This means that, if the graph stays in the same class, the minimax regret does not change dramatically after perturbing one edge.
+		}
+		
+	\frame{
+		\frametitle{Unstable graphs}
+		There are three possibilities:
+		\begin{itemize}
+			\item[(i)] going from strongly observable graphs to weakly observable ones and back.
+			\item[(ii)] going from strongly observable graphs to non observable ones and back.
+			\item[(iii)] going from weakly observable graphs to non observable ones and back.
+		\end{itemize}
+		}
+	
+	\frame{
+		\frametitle{Unstable graphs}
+		\begin{itemize}
+			\item[(i)] In this case, we remove a self loop for an vertice that has other inward edges or we remove an edge for a loop less vertice that also has other inward edges.
+			\item[(ii)] When possible, we remove a loop for a vertice that has no other inward edge.
+			\item[(iii)] When possible, we remove the only inward edge, that is not a self loop, to such a vertice.
+		\end{itemize}
+	}
+	
 
 \section{Experiments}
 \frame{\frametitle{Strongly observable graph}
