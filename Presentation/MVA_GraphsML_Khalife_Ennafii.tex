@@ -46,28 +46,39 @@
 \section{Introduction} 
 
 
-\subsection{Introduction}
-\frame{ \frametitle{Introduction}
+\subsection{Bandit framework}
+\frame{ \frametitle{Bandit framework:}
 \begin{itemize}
-	\item Bandit framework and feedback graphs
-	\item Sequence of losses $(l_t)_{1 \leq t \leq T}$ and actions $(I_t)_{1 \leq t \leq T} $
+	\item Sequence of losses $(l_t)_{1 \leq t \leq T}$ and actions $(i_t)_{1 \leq t \leq T} $
 	~\\
 	~\\
-	\item Minimax regret $ R(G,T)=\min_{S} \max_{l_1,...,l_T} \mathbb{E}  \sum_{t=1}^{T} l_t(I_t) -\min_{i} \sum_{t=1}^{T}l_t(i)  $
+	\item Minimax regret $ R(G,T)=\min_{S} \max_{l_1,...,l_T} \mathbb{E}  \sum_{t=1}^{T} l_t(i_t) -\min_{i} \sum_{t=1}^{T}l_t(i)  $
 	~\\
 \end{itemize}
-~\\
-		%\centering \includegraphics[width=5cm]{Afib_ecg.jpg}
-
-
 }
+
+\subsection{Feedback graph:}
+\frame{
+	\frametitle{Feedback graph}
+	
+	\begin{itemize}
+		\item Directed graph with $K$ nodes corresponding to the possible actions.
+		
+		\item When a player chooses action $i$ he gets feedback concerning some $j$: this represented by an edge. 
+		
+		\item A self loop means that whenever the player chooses the action he gets a feedback on it.
+	\end{itemize}
+	}
 
 
 \frame{\frametitle{Well-known configuration}
-		\begin{itemize}
-			\item EWF \qquad \qquad \qquad \qquad \qquad \qquad \qquad EXP3 configuration
-			\end{itemize}
-			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+		\begin{figure}
+			\centering
+			\begin{minipage}{0.45\textwidth}
+				\centering
+			\caption{Feedback with expert advice}
+			\begin{tikzpicture}[
+			->,>=stealth',shorten >=1pt,auto,node distance=3cm,
 			thick,main node/.style={circle,draw,font=\Large\bfseries}]
 			\node[main node] (1) at (0,0) {1};
 			\node[main node] (2) at (-1.5,-0.7) {2};
@@ -106,43 +117,55 @@
 			\Edge[](3)(5)
 			\Edge[](2)(1)
 			\end{tikzpicture}
-			\hfill
-			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
-			thick,main node/.style={circle,draw,font=\Large\bfseries}]
-			\node[main node] (1) at (0,0) {1};
-			\node[main node] (2) at (-1.5,-0.7) {2};
-			\node[main node] (3) at (-0.7, -2) {3};
-			\node[main node] (4) at (0.7,-2) {4};
-			\node[main node] (5) at (1.5,-0.7) {5};
-			\path
-			(1) edge [loop above] node {} (1);
-			\path
-			(2) edge [loop above] node {} (2);
-			\path
-			(3) edge [loop above] node {} (3);
-			\path
-			(4) edge [loop above] node {} (4);
-			\path
-			(5) edge [loop above] node {} (5);
-			\end{tikzpicture}
+			\end{minipage}\hfill
+			\begin{minipage}{0.45\textwidth}
+				\centering
+				\caption{Bandit feedback}
+				\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+				thick,main node/.style={circle,draw,font=\Large\bfseries}]
+				\node[main node] (1) at (0,0) {1};
+				\node[main node] (2) at (-1.5,-0.7) {2};
+				\node[main node] (3) at (-0.7, -2) {3};
+				\node[main node] (4) at (0.7,-2) {4};
+				\node[main node] (5) at (1.5,-0.7) {5};
+				\path
+				(1) edge [loop above] node {} (1);
+				\path
+				(2) edge [loop above] node {} (2);
+				\path
+				(3) edge [loop above] node {} (3);
+				\path
+				(4) edge [loop above] node {} (4);
+				\path
+				(5) edge [loop above] node {} (5);
+				\end{tikzpicture}
+			\end{minipage}
+		\end{figure}
 }
 
 \subsection{Previous results}
 
 \frame{\frametitle{Previous results}
+	Bounds on the minimax regret with respect of the geometry of the graph :
 \begin{itemize}
- 
- \item  Bounds on the minimax regret with respect of the geometry of the graph :
- ~\\
- ~\\
-\item Strongly observable with independence number $\alpha$ : $ R(G,T)= \tilde{O}(\alpha^{1/2}T^{1/2})$.
-\item Weakly observable with domination number $\delta$ : $ R(G,T) = \tilde{O}(\delta^{1/2}T^{1/2})$
- \item Unobservable : $ R(G,T) = \tilde{O}(T) $.
+\item Strongly observable with independence number $\alpha$ : $ R(G,T)= \tilde{\Theta}(\alpha^{1/2}T^{1/2})$.
+\item Weakly observable with domination number $\delta$ : $ R(G,T) = \tilde{\Theta}(\delta^{1/3}T^{2/3})$
+ \item Unobservable : $ R(G,T) = \tilde{\Theta}(T) $.
 \end{itemize}
 }
 
 
 \section{Theoretical Study}
+
+\subsection{Definitions:}
+
+\frame{
+	\frametitle{Definitions:}
+	\begin{block}{Definition:(Observability)}
+		Let $G=(V,E)$ be a directed graph.
+	\end{block}
+	
+	}
 
 \section{Experiments}
 \frame{\frametitle{Strongly observable graph}
